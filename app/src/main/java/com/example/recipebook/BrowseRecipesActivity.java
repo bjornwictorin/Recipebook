@@ -21,8 +21,10 @@ public class BrowseRecipesActivity extends AppCompatActivity {
         //Query the database.
         String[] projection = new String[] {RecipeProviderContract._ID,
                 RecipeProviderContract.RECIPE_TITLE};
+        //Makes the titles sorted in alphabetical order (case insensitive).
+        String sortOrder = RecipeProviderContract.RECIPE_TITLE + " COLLATE NOCASE ASC";
         Cursor cursor = getContentResolver().query(RecipeProviderContract.RECIPE_URI, projection,
-                null, null, null);
+                null, null, sortOrder);
         //Lists to hold ids and titles.
         final ArrayList<Integer> idList = new ArrayList<Integer>();
         if (cursor.moveToFirst()) {
