@@ -23,7 +23,8 @@
             android:multiprocess="true" />
 
         <activity android:name=".AddRecipeActivity" />
-        <activity android:name=".BrowseRecipesActivity"></activity>
+        <activity android:name=".BrowseRecipesActivity" />
+        <activity android:name=".ViewRecipeActivity"></activity>
     </application>
 
 </manifest>
