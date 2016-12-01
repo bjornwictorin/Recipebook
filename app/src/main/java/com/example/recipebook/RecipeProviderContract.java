@@ -10,6 +10,6 @@ public class RecipeProviderContract {
     public static final String AUTHORITY = "com.example.recipebook.RecipeContentProvider";
     public static final Uri RECIPE_URI = Uri.parse("content://"+AUTHORITY+"/recipes");
     public static final String _ID = "_id";
-    public static final String RECIPETITLE = "recipetitle";
-    public static final String RECIPEINSTRUCTIONS = "recipeinstructions";
+    public static final String RECIPE_TITLE = "recipetitle";
+    public static final String RECIPE_INSTRUCTIONS = "recipeinstructions";
 }

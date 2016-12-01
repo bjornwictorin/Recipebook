@@ -15,12 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
+            android:name=".RecipeContentProvider"
             android:authorities="com.example.recipebook.RecipeContentProvider"
-            android:multiprocess="true"
             android:exported="true"
-            android:name="com.example.recipebook.RecipeContentProvider">
-        </provider>
+            android:multiprocess="true" />
+
+        <activity android:name=".AddRecipeActivity" />
+        <activity android:name=".BrowseRecipesActivity"></activity>
     </application>
 
 </manifest>
