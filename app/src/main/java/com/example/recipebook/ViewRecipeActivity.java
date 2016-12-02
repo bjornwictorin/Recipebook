@@ -4,9 +4,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewRecipeActivity extends AppCompatActivity {
+
+    private int recipeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +19,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
         //Query the database.
         Bundle bundle = getIntent().getExtras();
-        int recipeID = bundle.getInt("recipe_id");
+        recipeID = bundle.getInt("recipe_id");
         Log.d("G53MDP", "id: " + recipeID);
         String[] projection = {RecipeProviderContract._ID, RecipeProviderContract.RECIPE_TITLE,
                 RecipeProviderContract.RECIPE_INSTRUCTIONS};
@@ -32,5 +36,19 @@ public class ViewRecipeActivity extends AppCompatActivity {
         TextView descriptionView = (TextView) findViewById(R.id.description);
         titleView.setText(title);
         descriptionView.setText(description);
+    }
+
+    public void onClickDelete(View v) {
+        //Delete the recipe from the database.
+        String selection = RecipeProviderContract._ID + " = ?";
+        String[] selectionArgs = {"" + recipeID};
+        getContentResolver().delete(RecipeProviderContract.RECIPE_URI, selection, selectionArgs);
+        getContentResolver().notifyChange(RecipeProviderContract.RECIPE_URI, null);
+        //Display toast message that tells the user that the recipe has been deleted.
+        Toast toast = Toast.makeText(getApplicationContext(), "The recipe was deleted.",
+                Toast.LENGTH_SHORT);
+        toast.show();
+        //Return the user to the activity that lists the activities.
+        finish();
     }
 }

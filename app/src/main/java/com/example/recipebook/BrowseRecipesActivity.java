@@ -18,7 +18,13 @@ public class BrowseRecipesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_recipes);
-        //Query the database.
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Query the database. This is placed in the onStart method in order to make the
+        //list update whenever a recipe is deleted or edited from within the ViewRecipeActivity.
         String[] projection = new String[] {RecipeProviderContract._ID,
                 RecipeProviderContract.RECIPE_TITLE};
         //Makes the titles sorted in alphabetical order (case insensitive).

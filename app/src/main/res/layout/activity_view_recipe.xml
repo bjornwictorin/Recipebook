@@ -39,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:id="@+id/delete_recipe_button"
-        android:text="@string/delete_recipe"/>
+        android:text="@string/delete_recipe"
+        android:onClick="onClickDelete"/>
     </LinearLayout>
 
     <TextView

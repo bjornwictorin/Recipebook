@@ -80,6 +80,16 @@ public class RecipeContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        throw new UnsupportedOperationException("Delete is not implemented yet.");
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String tableName;
+        switch (uriMatcher.match(uri)) {
+            case 1:
+                tableName = "recipes";
+                break;
+            default:
+                tableName = "recipes";
+                break;
+        }
+        return db.delete(tableName, selection, selectionArgs);
     }
 }
