@@ -6,4 +6,6 @@
     <string name="enter_description">Enter recipe description:</string>
     <string name="add_header">Adding new recipe...</string>
     <string name="create_button">Done</string>
+    <string name="edit_recipe">Edit</string>
+    <string name="delete_recipe">Delete</string>
 </resources>
