@@ -12,4 +12,7 @@
     <string name="edit_title_text">Edit title</string>
     <string name="edit_description_text">Edit description</string>
     <string name="edit_done_button">Done</string>
+    <string name="search_button_text">Search</string>
+    <string name="search_hint">Enter search term</string>
+    <string name="search_button">Search</string>
 </resources>

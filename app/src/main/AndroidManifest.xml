@@ -25,7 +25,8 @@
         <activity android:name=".AddRecipeActivity" />
         <activity android:name=".BrowseRecipesActivity" />
         <activity android:name=".ViewRecipeActivity" />
-        <activity android:name=".EditRecipeActivity"></activity>
+        <activity android:name=".EditRecipeActivity" />
+        <activity android:name=".SearchRecipesActivity"></activity>
     </application>
 
 </manifest>

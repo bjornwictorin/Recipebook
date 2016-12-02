@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, BROWSE_REQUEST_CODE);
     }
 
+    public void searchRecipesOnClick(View v) {
+        Intent intent = new Intent(this, SearchRecipesActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
