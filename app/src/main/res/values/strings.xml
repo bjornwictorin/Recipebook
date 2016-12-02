@@ -2,17 +2,17 @@
     <string name="app_name">Recipebook</string>
     <string name="add_button">Add recipe</string>
     <string name="browse_button">Browse recipes</string>
-    <string name="enter_title">Enter recipe title:</string>
-    <string name="enter_description">Enter recipe description:</string>
+    <string name="enter_title">Enter recipe title</string>
+    <string name="enter_description">Enter recipe description</string>
     <string name="add_header">Adding new recipe...</string>
     <string name="create_button">Done</string>
     <string name="edit_recipe">Edit</string>
     <string name="delete_recipe">Delete</string>
-    <string name="edit_header">Edit recipe</string>
+    <string name="edit_header">Editing recipe...</string>
     <string name="edit_title_text">Edit title</string>
     <string name="edit_description_text">Edit description</string>
     <string name="edit_done_button">Done</string>
-    <string name="search_button_text">Search</string>
+    <string name="search_button_text">Search for recipes</string>
     <string name="search_hint">Enter search term</string>
-    <string name="search_button">Search</string>
+    <string name="search_button">Search for recipes</string>
 </resources>

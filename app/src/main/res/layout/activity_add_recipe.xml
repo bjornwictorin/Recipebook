@@ -11,41 +11,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.recipebook.AddRecipeActivity">
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textStyle="bold"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:text="@string/add_header"/>
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter_title" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="fill_parent"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:text="@string/add_header"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/create_button"
+            android:onClick="createRecipeOnClick"/>
+
+    </LinearLayout>
+
+
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:hint="@string/enter_title"
         android:id="@+id/edit_title" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter_description" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:gravity="top"
+        android:hint="@string/enter_description"
         android:id="@+id/edit_instruction"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="@string/create_button"
-        android:onClick="createRecipeOnClick"/>
+
+
 
 </LinearLayout>
