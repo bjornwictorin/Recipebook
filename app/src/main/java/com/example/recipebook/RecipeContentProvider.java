@@ -75,7 +75,17 @@ public class RecipeContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        throw new UnsupportedOperationException("Update is not implemented.");
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String tableName;
+        switch (uriMatcher.match(uri)) {
+            case 1:
+                tableName = "recipes";
+                break;
+            default:
+                tableName = "recipes";
+                break;
+        }
+        return db.update(tableName, values, selection, selectionArgs);
     }
 
     @Override

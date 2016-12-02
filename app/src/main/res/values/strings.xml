@@ -8,4 +8,8 @@
     <string name="create_button">Done</string>
     <string name="edit_recipe">Edit</string>
     <string name="delete_recipe">Delete</string>
+    <string name="edit_header">Edit recipe</string>
+    <string name="edit_title_text">Edit title</string>
+    <string name="edit_description_text">Edit description</string>
+    <string name="edit_done_button">Done</string>
 </resources>

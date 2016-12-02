@@ -1,5 +1,6 @@
 package com.example.recipebook;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +12,19 @@ import android.widget.Toast;
 public class ViewRecipeActivity extends AppCompatActivity {
 
     private int recipeID;
+    private static final int EDIT_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //This code is placed in the onStart method because the database has to be queried again
+        //if the recipe is edited.
         //Query the database.
         Bundle bundle = getIntent().getExtras();
         recipeID = bundle.getInt("recipe_id");
@@ -50,5 +58,25 @@ public class ViewRecipeActivity extends AppCompatActivity {
         toast.show();
         //Return the user to the activity that lists the activities.
         finish();
+    }
+
+    public void onClickEdit(View v) {
+        //Launch an activity that allows the user to edit the recipe.
+        Intent intent = new Intent(this, EditRecipeActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("recipe_id", recipeID);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, EDIT_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == EDIT_REQUEST_CODE) {
+                Toast toast = Toast.makeText(getApplicationContext(), "The recipe was updated",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
     }
 }
