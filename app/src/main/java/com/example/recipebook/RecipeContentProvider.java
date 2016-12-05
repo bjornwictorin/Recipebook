@@ -7,7 +7,6 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * Created by Björn on 2016-12-01.
@@ -25,7 +24,6 @@ public class RecipeContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        Log.d("G53MDP", "com.example.recipebook.RecipeContentProvider onCreate");
         this.dbHelper = new DBHelper(this.getContext(), "recipeDB", null, 1);
         return true;
     }

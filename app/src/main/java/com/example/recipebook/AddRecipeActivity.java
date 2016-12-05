@@ -1,14 +1,12 @@
 package com.example.recipebook;
 
-import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddRecipeActivity extends AppCompatActivity {
 
@@ -19,7 +17,6 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     public void createRecipeOnClick(View v) {
-        Log.d("G53MDP", "createRecipeOnClick");
         //Read text input and store temporarily in strings.
         EditText editTitle = (EditText) findViewById(R.id.edit_title);
         String title = editTitle.getText().toString();
@@ -31,12 +28,9 @@ public class AddRecipeActivity extends AppCompatActivity {
         recipeValues.put(RecipeProviderContract.RECIPE_INSTRUCTIONS, instruction);
         Uri newRecipeUri = getContentResolver().insert(RecipeProviderContract.RECIPE_URI,
                 recipeValues);
-        //Store URI of the new recipe as the activity's result and finish the activity.
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("new_recipe_uri", newRecipeUri);
-        Intent result = new Intent();
-        result.putExtras(bundle);
-        setResult(Activity.RESULT_OK, result);
+        //Display toaster messaging that the recipe has been added to the database.
+        Toast toast = Toast.makeText(getApplicationContext(), "Recipe added.", Toast.LENGTH_SHORT);
+        toast.show();
         finish();
     }
 }

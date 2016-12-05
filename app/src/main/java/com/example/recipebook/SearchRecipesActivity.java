@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -41,22 +40,23 @@ public class SearchRecipesActivity extends AppCompatActivity {
         //anywhere in the title or the instruction.
         String selection = RecipeProviderContract.RECIPE_TITLE + " LIKE ? OR " +
                 RecipeProviderContract.RECIPE_INSTRUCTIONS + " LIKE ?";
+        //The % signs are here to let the search term be a substring present anywhere in the title
+        //or instruction.
         String[] selectionArgs = {"%" + searchTerm + "%", "%" + searchTerm + "%"};
         //Makes the recipes ordered alphabetically without regard to upper or lower case.
         String sortOrder = RecipeProviderContract.RECIPE_TITLE + " COLLATE NOCASE ASC";
         Cursor cursor = getContentResolver().query(RecipeProviderContract.RECIPE_URI,
                 projection, selection, selectionArgs, sortOrder);
-        Log.d("G53MDP", "" + cursor.getCount());
         if (cursor.getCount() < 1) {
             //No search results.
             Toast toast = Toast.makeText(getApplicationContext(),
                     "No recipes matched your search term.", Toast.LENGTH_SHORT);
             toast.show();
+            //Clear all elements in the list.
             ListView lv = (ListView) findViewById(R.id.search_results_list);
-            //Clear all elements in list.
             lv.setAdapter(null);
         } else {
-            //Recipes found that matches the search term.
+            //Recipes found that match the search term.
             //List to hold the ids of the recipes in the search result.
             final ArrayList<Integer> idList = new ArrayList<Integer>();
             cursor.moveToFirst();

@@ -1,12 +1,12 @@
 package com.example.recipebook;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditRecipeActivity extends AppCompatActivity {
 
@@ -18,13 +18,14 @@ public class EditRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_recipe);
         recipeID = getIntent().getExtras().getInt("recipe_id");
 
-        //Query the database and populate the text fields.
+        //Query the database.
         String[] projection = {RecipeProviderContract._ID, RecipeProviderContract.RECIPE_TITLE,
                 RecipeProviderContract.RECIPE_INSTRUCTIONS};
         String selection = RecipeProviderContract._ID + " = ?";
         String[] selectionArgs = {"" + recipeID};
         Cursor cursor = getContentResolver().query(RecipeProviderContract.RECIPE_URI, projection,
                 selection, selectionArgs, null);
+        //Populate the text fields.
         cursor.moveToFirst();
         String title = cursor.getString(1);
         String description = cursor.getString(2);
@@ -48,7 +49,10 @@ public class EditRecipeActivity extends AppCompatActivity {
         String[] selectionArgs = {"" +  recipeID};
         getContentResolver().update(RecipeProviderContract.RECIPE_URI, newValues, selection,
                 selectionArgs);
-        setResult(Activity.RESULT_OK);
+        //Display toaster that tells the user that the recipe has been updated.
+        Toast toast = Toast.makeText(getApplicationContext(), "The recipe was updated.",
+                Toast.LENGTH_SHORT);
+        toast.show();
         finish();
     }
 }

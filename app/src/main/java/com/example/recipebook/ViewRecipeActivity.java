@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 public class ViewRecipeActivity extends AppCompatActivity {
 
     private int recipeID;
-    private static final int EDIT_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,6 @@ public class ViewRecipeActivity extends AppCompatActivity {
         //Query the database.
         Bundle bundle = getIntent().getExtras();
         recipeID = bundle.getInt("recipe_id");
-        Log.d("G53MDP", "id: " + recipeID);
         String[] projection = {RecipeProviderContract._ID, RecipeProviderContract.RECIPE_TITLE,
                 RecipeProviderContract.RECIPE_INSTRUCTIONS};
         String selection = RecipeProviderContract._ID + " = ?";
@@ -39,7 +36,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         String title = cursor.getString(1);
         String description = cursor.getString(2);
 
-        //Fill the title textview.
+        //Fill the title and description text views.
         TextView titleView = (TextView) findViewById(R.id.title);
         TextView descriptionView = (TextView) findViewById(R.id.description);
         titleView.setText(title);
@@ -66,17 +63,6 @@ public class ViewRecipeActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("recipe_id", recipeID);
         intent.putExtras(bundle);
-        startActivityForResult(intent, EDIT_REQUEST_CODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == EDIT_REQUEST_CODE) {
-                Toast toast = Toast.makeText(getApplicationContext(), "The recipe was updated",
-                        Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }
+        startActivity(intent);
     }
 }

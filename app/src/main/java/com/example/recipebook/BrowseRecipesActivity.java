@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,11 +23,14 @@ public class BrowseRecipesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //Query the database. This is placed in the onStart method in order to make the
-        //list update whenever a recipe is deleted or edited from within the ViewRecipeActivity.
+        //list update whenever this activity is started. This is especially important when the user
+        //has deleted a recipe, and is taken back to the browse activity.
+        //Choose which type of data from the content provider that is desired.
         String[] projection = new String[] {RecipeProviderContract._ID,
                 RecipeProviderContract.RECIPE_TITLE};
         //Makes the titles sorted in alphabetical order (case insensitive).
         String sortOrder = RecipeProviderContract.RECIPE_TITLE + " COLLATE NOCASE ASC";
+        //Actual query.
         Cursor cursor = getContentResolver().query(RecipeProviderContract.RECIPE_URI, projection,
                 null, null, sortOrder);
         //List to hold ids.
@@ -50,7 +52,6 @@ public class BrowseRecipesActivity extends AppCompatActivity {
         //Handle click events in the list.
         AdapterView.OnItemClickListener clickHandler = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Log.d("G53MDP", "" + position);
                 //Launch the ViewRecipeActivity, and pass it the id of the recipe to view.
                 Intent intent = new Intent(BrowseRecipesActivity.this, ViewRecipeActivity.class);
                 Bundle bundle = new Bundle();
