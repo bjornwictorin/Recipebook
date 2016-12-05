@@ -31,7 +31,7 @@ public class BrowseRecipesActivity extends AppCompatActivity {
         String sortOrder = RecipeProviderContract.RECIPE_TITLE + " COLLATE NOCASE ASC";
         Cursor cursor = getContentResolver().query(RecipeProviderContract.RECIPE_URI, projection,
                 null, null, sortOrder);
-        //Lists to hold ids.
+        //List to hold ids.
         final ArrayList<Integer> idList = new ArrayList<Integer>();
         if (cursor.moveToFirst()) {
             do {

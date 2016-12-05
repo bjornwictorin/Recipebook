@@ -25,7 +25,7 @@ public class SearchRecipesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //onSearchClick is called to make sure that the result list is updated every time the
+        //onSearchClick is called here to make sure that the result list is updated every time the
         //activity starts. This is important since otherwise the list will show recipes that have
         //been deleted if you delete a recipe that you have found through the search function.
         onSearchClick(null);
@@ -37,8 +37,12 @@ public class SearchRecipesActivity extends AppCompatActivity {
         String searchTerm = searchBox.getText().toString();
         //Create and make a db query based on the search term.
         String[] projection = {RecipeProviderContract._ID, RecipeProviderContract.RECIPE_TITLE};
-        String selection = RecipeProviderContract.RECIPE_TITLE + " LIKE ?";
-        String[] selectionArgs = {"%" + searchTerm + "%"};
+        //This search query will make the database return all recipes that contain the search term
+        //anywhere in the title or the instruction.
+        String selection = RecipeProviderContract.RECIPE_TITLE + " LIKE ? OR " +
+                RecipeProviderContract.RECIPE_INSTRUCTIONS + " LIKE ?";
+        String[] selectionArgs = {"%" + searchTerm + "%", "%" + searchTerm + "%"};
+        //Makes the recipes ordered alphabetically without regard to upper or lower case.
         String sortOrder = RecipeProviderContract.RECIPE_TITLE + " COLLATE NOCASE ASC";
         Cursor cursor = getContentResolver().query(RecipeProviderContract.RECIPE_URI,
                 projection, selection, selectionArgs, sortOrder);
@@ -71,7 +75,6 @@ public class SearchRecipesActivity extends AppCompatActivity {
             //Handle click events in the list.
             AdapterView.OnItemClickListener clickHandler = new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Log.d("G53MDP", "" + position);
                     //Launch the ViewRecipeActivity, and pass it the id of the recipe to view.
                     Intent intent = new Intent(SearchRecipesActivity.this, ViewRecipeActivity.class);
                     Bundle bundle = new Bundle();
@@ -82,6 +85,5 @@ public class SearchRecipesActivity extends AppCompatActivity {
             };
             lv.setOnItemClickListener(clickHandler);
         }
-
     }
 }
