@@ -51,7 +51,6 @@ public class RecipeContentProvider extends ContentProvider {
         }
         long id = db.insert(tableName, null, values);
         Uri nu = ContentUris.withAppendedId(uri, id);
-        getContext().getContentResolver().notifyChange(nu, null);
         return nu;
     }
 
